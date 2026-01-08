@@ -1,3 +1,10 @@
+#[cfg(not(feature = "std"))]
+use alloc::vec::Vec;
+
+#[cfg(not(feature = "std"))]
+use core::cmp::min;
+
+#[cfg(feature = "std")]
 use std::cmp::min;
 
 use derive_builder::Builder;
@@ -59,6 +66,7 @@ use crate::PixelSize;
 /// ```
 #[derive(Debug, Builder, Clone, PartialEq, Eq, Hash)]
 #[builder(build_fn(skip))]
+#[cfg_attr(not(feature = "std"), builder(no_std))]
 #[non_exhaustive]
 pub struct BigText<'a> {
     /// The text to display
@@ -198,6 +206,9 @@ fn render_glyph(glyph: [u8; 8], area: Rect, buf: &mut Buffer, pixel_size: &Pixel
 
 #[cfg(test)]
 mod tests {
+    #[cfg(not(feature = "std"))]
+    use alloc::vec;
+
     use ratatui_core::style::Stylize;
 
     use super::*;

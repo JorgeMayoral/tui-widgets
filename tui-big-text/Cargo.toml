@@ -14,7 +14,7 @@ rust-version.workspace = true
 
 [dependencies]
 derive_builder.workspace = true
-font8x8 = "0.3.1"
+font8x8 = { version = "0.3.1", default-features = false, features = ["unicode"] }
 itertools.workspace = true
 ratatui-core.workspace = true
 
@@ -26,3 +26,7 @@ indoc.workspace = true
 ratatui = { workspace = true, default-features = true }
 strum.workspace = true
 tokio = { workspace = true, features = ["full"] }
+
+[features]
+default = ["std"]
+std = []

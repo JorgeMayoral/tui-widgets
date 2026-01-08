@@ -357,6 +357,10 @@ const fn get_symbol_octant_size(
 mod tests {
     use super::*;
 
+    #[cfg(not(feature = "std"))]
+    type Result<T> = core::result::Result<T, alloc::boxed::Box<dyn core::error::Error>>;
+
+    #[cfg(feature = "std")]
     type Result<T> = std::result::Result<T, Box<dyn std::error::Error>>;
 
     #[test]

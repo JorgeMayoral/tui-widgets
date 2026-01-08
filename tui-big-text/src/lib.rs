@@ -1,3 +1,5 @@
+#![cfg_attr(not(feature = "std"), no_std)]
+
 //! A [Ratatui] widget to render gloriously oversized pixel text using glyphs from the [font8x8]
 //! crate. Part of the [tui-widgets] suite by [Joshka].
 //!
@@ -114,6 +116,9 @@
 //!
 //! [Joshka]: https://github.com/joshka
 //! [tui-widgets]: https://crates.io/crates/tui-widgets
+
+#[cfg(not(feature = "std"))]
+extern crate alloc;
 
 mod big_text;
 mod pixel_size;
